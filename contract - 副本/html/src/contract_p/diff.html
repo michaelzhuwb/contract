@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>差异</title>
+    <link rel="stylesheet" href="./basicMedia/css/bootstrap.min.css"> 
+    <style type="text/css">
+        table.diff {font-family:Courier; border:medium;}
+        .diff_header {background-color:#e0e0e0}
+        td.diff_header {text-align:right}
+        .diff_next {background-color:#c0c0c0}
+        .diff_add {background-color:#aaffaa}
+        .diff_chg {background-color:#ffff77}
+        .diff_sub {background-color:#ffaaaa}
+    </style>
+
+</head>
+<body style="background: #9124a3;">
+    <div class="container">
+    <div  class="jumbotron" style="text-align: left;">
+        <div style="text-align: left;">
+            <b>相似度：<span id="sim"></span></b>
+        </div>
+        <div id="table_content">
+
+        </div>
+        <div style="text-align: center;">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <!-- <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li> -->
+                  <!-- <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li class="active"><a href="#">3</a></li>
+                  <li><a href="">4</a></li>
+                  <li><a href="#">5</a></li> -->
+                  <!-- <li>
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li> -->
+                </ul>
+              </nav>
+        </div>
+        <div id="output"></div>
+    </div>  
+</div>
+
+    <script src="./basicMedia/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="basicMedia/js/bootstrap.min.js"></script>
+
+<script>
+        var getParamers = function(){
+        // var _t = window.location.search.substring(1)
+        var _t = window.location.search.substring(1).replace('#','');
+
+        x = _t.split('&')
+        _parm = Object()
+        for(var i=0;i<x.length;i++)
+        {   
+            var _t = x[i].split('=')
+            if (_t.length==1)
+                _parm[_t[-1]] = ''
+            else
+                _parm[_t[0]]= _t[1]
+        }
+        return _parm
+    }
+    params = getParamers()
+    similarity = params['similarity'].split(',')
+    $('#sim').html(similarity[0])
+
+    var content_list = []
+    function readTxt() {
+         var xhr = new XMLHttpRequest();
+         xhr.open('get',params['content'],true);
+         xhr.send();
+         xhr.onreadystatechange = function () {
+             if (xhr.readyState == 4&&xhr.status == 200){
+                //  alert("请求服务器数据成功且返回数据成功！");
+                //  jsContainer.innerHTML = xhr.responseText;
+                // alert(xhr.responseText)
+                var contents = xhr.responseText.split('&#*&')
+                contents.pop()
+                content_list = contents
+
+                $('#table_content').html(contents[0])
+
+                strs= ''
+                for (var i=0;i<content_list.length;i++)
+                {   
+                    if (i==0)
+                        strs +='<li name="pagging" class="active"><a value="'+i+'" class="pagging" href="#">'+(i+1)+'</a></li>'
+                    else
+                        strs +='<li name="pagging" class=""><a value="'+i+'" class="pagging" href="#">'+(i+1)+'</a></li>'
+                }
+                $('.pagination').html(strs)
+                $('.pagging').click(function(){
+                    $('[name="pagging"]').removeClass('active')
+                    $(this).parent().addClass('active')
+                    $('#table_content').html('')
+                    $('#table_content').html(content_list[parseInt($(this).attr('value'))])
+                    $('#sim').html(similarity[parseInt($(this).attr('value'))])
+                    // alert($(this).parent())
+                })
+
+             }
+ //            else {
+ //                console.log(xhr.status);
+ //            }
+         };
+    }
+    readTxt()
+    strs= ''
+    for (var i=0;i<content_list.length;i++)
+    {
+        strs +='<li><a href="#">'+(i+1)+'</a></li>'
+    }
+    $('.pagination').html(strs)
+
+</script>
+
+</body>
+</html>

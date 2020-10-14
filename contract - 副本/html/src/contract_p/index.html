@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+
+    <link href="./assets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/font-googleapis.css" />
+    <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="../basicMedia/css/bootstrap.min.css">  -->
+    <link rel="stylesheet" href="../basicMedia/css/jquery.dataTables.min.css"> 
+    <link rel="stylesheet" href="./basicMedia/css/load.css">
+    <!-- <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"> -->
+    <!-- <link href="./assets/demo/demo.css" rel="stylesheet" /> -->
+    
+    <style type="text/css">
+        ul li{
+            list-style-type: none;
+        }
+        button:hover{
+				cursor: pointer;
+			}
+			
+        .test_mask{
+				width: 800px;
+				height: 300px;
+				border: 1px solid #BCE8F1;
+			}
+    </style>
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+    <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+    <script src="./assets/js/plugins/moment.min.js"></script>
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+    <script src="./assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+
+    <script src="./basicMedia/js/load-min.js"></script>
+</head>
+<body class="index-page sidebar-collapse">
+    <!-- <h1>欢迎您！</h1> -->
+
+    <div class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url('./assets/img/bg2.jpg');">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <div class="brand">
+                <h1>点链科技</h1>
+                <h3>纸质合同溯源与鉴伪管理平台.</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="main main-raised">
+        <div class="section">
+          <div class="container">
+            <div class="title">
+              <h2>合同信息</h2>
+            </div>
+            <!--  contract -->
+            <div id="contract" class="cd-section">
+              <div class="title">
+                <h3> <br>
+                  <small>合同信息详情展示</small>
+                </h3>
+              </div>
+              <div class="row">
+                    <div class="col-md-12 mx-auto">
+                        <div name="image" id="dropbox" style="min-width:400px;min-height:150px;border:3px dashed silver;text-align: center;">
+                            <span class="label label-default" style="line-height:150px;text-align: center;align:center">
+                                拖拽添加合同
+                            </span>
+                        </div>
+                    </div>
+              </div>
+              <div class="row">
+                <!-- <div class="col-md-8 mx-auto">
+                  <button class="btn btn-primary btn-round" data-toggle="modals" id="add_contract_s" data-target="#exampleModalLong_s">
+                    <i class="material-icons">add_circle</i> 添加合同
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                </div> -->
+                <div class="up_form  col-md-12 mx-auto" hidden >
+                    <!-- <form > -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                              <label for="upload_name">上传人</label>
+                              <input type="text" class="form-control" name="upload_name" placeholder="" value="管理员">
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="up_time">上传时间</label>
+                              <input type="text" class="form-control" name="upload_date" placeholder="" value="2020-10-21">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="company_name">公司名称</label>
+                                <input type="text" class="form-control" name="company_name" placeholder="">
+                              </div>
+                              <div class="form-group col-md-4">
+                                <label for="contract_name">合同名称</label>
+                                <input type="text" class="form-control" name="contract_name"  placeholder="">
+                              </div>
+                            <div class="form-group col-md-4">
+                            </div>
+                            <div class="form-group col-md-2" style="margin-top:17px;">
+                                <button class="btn btn-primary btn-sm " id="save_contract_info" >
+                                    <i class="material-icons">add_circle</i> 上传合同
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                                <span id="upload_mask">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </div>
+                          </div>
+                    <!-- </form> -->
+                </div>
+
+
+
+              </div>
+            <!-- <br> -->
+            <div class="row">
+                <div class="col-md-4 form-group bmd-form-group">
+                    <label class="bmd-label-floating">搜索...</label>
+                    <input id="my_news_search" type="search" class="form-control" aria-controls="contractShow">
+                </div>
+            </div>
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+
+                    <table id="contractShow" class="display table" style="text-align: center;"> 
+                        <thead>
+                            <tr>
+                                <th>公司名称</th>
+                                <th>合同名称</th>
+                                <th>上传人</th>
+                                <th>上传时间</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <!-- <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Extn.</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </tfoot> -->
+                    </table>
+                </div>
+              </div>
+            
+            </div>
+            <!--                 end buttons		         -->
+            <div class="space-50">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+
+    <!-- Modal add contract-->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLongTitle" ><b>鉴定合同</b></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="upfile_content">
+                <div name="image" id="dropbox_modal" style="min-width:300px;min-height:100px;border:3px dashed silver;">
+                </div>
+                <div class="form-group form-file-upload form-file-simple">
+                    <input type="file" class="inputFileHidden" multiple id="uploadFile">
+                    <div class="input-group">
+                    <input type="text" class="form-control inputFileVisible"  placeholder="&nbsp;&nbsp;请上传合同图片" for="uploadFile" disabled></label>
+                    <!-- <label type="text" class="form-control inputFileVisible"  placeholder="Simple chooser..." for="uploadFile"></label> -->
+                        <span class="input-group-btn">
+                            <label type="button" class="btn btn-fab btn-round btn-primary" for="uploadFile" >
+                                <i class="material-icons">attach_file</i>
+                            </label>
+                        </span>
+                        </div>
+                </div>
+
+            </div>
+            <div class="up_info">
+                <div class="info_chart row">
+                <div class="col-md-4 mx-auto">
+                    <a href="#" class="thumbnail" target = "_blank" >
+                        <img id="thumb_img" src="" alt="测试" width="50%">
+                    </a>
+                </div>
+                <div class="col-md-8 mx-auto" id="up_pdf_area" >
+                    <button class="btn btn-round btn-primary" id="pre_upload">确认上传</button>                                <span id="upload_mask">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span id="pre_upload_mask">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">添加的待上传图片...</label></label>
+                        <!-- <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                        <div class="form-control" id="exampleFormControlTextarea1">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto" id="up_pdf_thumb" hidden>
+                    <a href="#" class="up_thumbnail" target = "_blank" >
+                        <img id="up_thumb_img" src="" alt="测试" width="50%">
+                    </a>
+                </div>
+                </div>
+
+                <form id="up_form">
+                <button type="button" class="btn btn-primary" id="valid_contract_info" >鉴伪</button>
+                <div class="progress" >
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" height="60px" style="width: 0%;">
+                      <span class="sr-only">45% Complete</span>
+                    </div>
+                  </div>
+                </form>
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-static"></label>
+                    <input type="text" class="form-control diff_result" hidden placeholder="">
+                  </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id='modal-close'>关闭</button>
+          <!-- <button type="button" class="btn btn-primary save_contract_info" onclick="$('#save_contract_info').click();" hidden>保存</button> -->
+          <a type="button" href="" target="_black" class="btn btn-primary" style="color: #ffffff;" id="diff_detail" hidden>详情</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+    <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+    <script src="./assets/js/plugins/moment.min.js"></script>
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--  Google Maps Plugin    -->
+    <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+    <script src="./assets/js/material-kit.js?v=2.0.7" type="text/javascript"></script>
+
+    <script type="text/javascript" src="../basicMedia/js/md5.js"></script>
+    <!-- dataTable -->
+    <!-- <script type="text/javascript" src="basicMedia/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="../basicMedia/js/jquery.dataTables.min.js"></script>
+    <script src="./basicMedia/js/load-min.js"></script>
+<script>
+
+      $(function(){
+        // dataTable
+        var dataTable_data = [['asd','asd','adasd','asdasd','asdads']]
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                "url": "./assets/Chinese.txt"
+            },
+            "dom": "l<'#toolbar'>frtip",
+            "dom":"lBrtip"
+        });
+    
+        var table = $('#contractShow').DataTable( {
+
+            // data:dataTable_data,
+            iDisplayLength: 10, //每页初始显示5条记录
+            bLengthChange: false,
+            order:[3,'desc'],
+            "ajax":{
+                    //几个参数需要注意一下
+                        type: "GET",//方法类型
+                        url: "http://127.0.0.1:8000/contract/get_info" ,//url
+                        // async: false,
+                        data: {},
+                        // async: false,
+                        dataType: "json",//预期服务器返回的数据类型n
+                        dataSrc: function (myJson) {
+                            // if (myJson.timeout) {
+                            //     return "";
+                            // }
+                            dataTable_data = myJson['data']['info']
+                            console.log(dataTable_data)
+                            return dataTable_data;
+                        }
+                    },
+            initComplete: function ()
+            {
+
+                // $('.paginate_button:not(:disabled):not(.disabled)').css({'cursor':'pointer'})
+                
+                $('.paginate_button.currentsss, .paginate_button').css({'display':'inline-block','border-radius':'30px','border':0,'transition':'all .3s','padding':'0px 11px','margin':'0 3px',
+                                'min-width':'30px','line-height':'30px','font-weight':400,'font-size':'12px','text-transform':'uppercase','background':'transparent'})
+                $('.paginate_button.current, .paginate_button.current').css({'background':'transparent','text-decoration':'none'})
+                
+                $('.paginate_button:hover, .paginate_button:focus, .paginate_button.current:focus, .paginate_button.current:hover, .paginate_button:focus, .paginate_button:hover').css(
+                     {'background':'transparent','text-align':'center'}
+                 )
+
+                $('.paginate_button.current,.paginate_button.current:focus,.paginate_button.current:hover').css({'color':'#ffffff','background-color':'#9c27b0','border-color':'#9c27b0'})
+                $('.paginate_button.current').css({'color':'#ffffff'})
+            },
+            // columns: [
+            //     { data: 'name'},
+            //     { data: 'salary'},
+            //     { data: 'office'},
+            //     { data: 'position'}
+            // ]
+            drawCallback: function(){
+                $('.paginate_button.current, .paginate_button').css({'display':'inline-block','border-radius':'30px','border':0,'transition':'all .3s','padding':'0px 11px','margin':'0 3px',
+                                'min-width':'30px','line-height':'30px','font-weight':400,'font-size':'12px','text-transform':'uppercase'})
+                $('.paginate_button.current').css({'background':'transparent','text-decoration':'none'})
+                $('.paginate_button.current,.paginate_button.current:focus,.paginate_button.current:hover').css({'color':'#ffffff','background-color':'#9c27b0','border-color':'#9c27b0'})
+                
+                $('.valid').click(function(){
+
+                    file_list = []
+                    $('#exampleModalLong').modal('show')
+                    is_load_file = false
+                    contract_number = $(this).attr('cno')
+                    thumb_url = $(this).attr('contract_thumb_url')
+                    page_num = parseInt($(this).attr('page_num'))
+                    $('#thumb_img').attr('src',thumb_url)
+                    $('.thumbnail').attr('href',$('.'+contract_number+'').attr('href'))
+
+                })
+            }
+        })
+        $('#my_news_search').on( 'keyup', function () {
+            table.search( this.value ).draw();
+        })
+
+
+        // table.draw(true) 
+        // set string format fun
+        String.format = function(src){
+            if (arguments.length == 0) return null;
+            var args = Array.prototype.slice.call(arguments, 1);
+            return src.replace(/\{(\d+)\}/g, function(m, i){
+                return args[i];
+            });
+};
+        
+        var is_load_file = true
+
+        var contract_number = ''    // 选择的合同号
+        var thumb_url = ''
+        var page_num  = 0           // 合同页数
+        var file_list = []      // multifile array
+
+        // upload param
+        var formdata = function(){
+            var data = new FormData()
+            upload_names = $('input[name="upload_name"]')
+
+
+            upload_dates = $('input[name="upload_date"]')
+            company_names = $('input[name="company_name"]')
+            contract_names = $('input[name="contract_name"]')
+            console.log(contract_names)
+            total = []
+            list = [upload_names,upload_dates,company_names,contract_names]
+            for (var i=0;i<list.length;i++){
+                item = list[i]
+                var _dict = []
+                for(var j=0;j<item.length;j++){
+                    var value = $(item[j]).val().toString() || 'none'
+                    var key = $(item[j]).attr('md5_id').toString()
+                    var _dict_name = {}
+                    _dict_name[key] = value
+                    _dict.push(_dict_name)
+                }
+                total.push(_dict)
+            }
+            var data = {}
+            names = ['upload_name','upload_date','company_name','contract_name']
+            for(var i=0;i<total.length;i++){
+                item = total[i]
+                for(var k in item)
+                {   _item = item[k]
+                    for(var key in _item){
+                        if (data[key]== undefined) data[key] = {}
+                        _key_name = names[i]
+                        data[key][_key_name] = _item[key]
+                    }
+                }
+            }
+            console.log('formdata')
+            console.log(data)
+            return data
+            
+        }
+
+        // save info with contract 
+        function init(){
+            // day2.setTime(day2.getTime());
+
+            $.ajax({
+                    //几个参数需要注意一下
+                        type: "GET",//方法类型
+                        url: "http://127.0.0.1:8000/contract/get_info" ,//url
+                        // async: false,
+                        data: {},
+                        async: false,
+                        dataType: "json",//预期服务器返回的数据类型n
+                        success: function (result) {
+                            console.log(result);//打印服务端返回的数据(调试用)
+                            dataTable_data = result['data']['info']
+                            // table.draw()
+                        },
+                        error : function(data,type, err) {
+                            console.log("ajax错误类型："+type);
+                            console.log(err);
+                        }
+                    });
+        }
+
+        // console.log(dataTable_data)
+        // uploadfile func 
+        var up_file_fun = function(files,object){
+            day2 = new Date()
+            var s2 = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate()+' '+day2.getHours()+":"+day2.getMinutes()+":"+day2.getSeconds();
+            $('input[name="upload_date"]').val(s2)
+            $('input[name="company_name"]').val('')
+            $('.up_form').attr('hidden',false)
+            $('input[name="contract_name"]').val(files[0].name.split('.')[0])
+
+                for (var i=0;i<files.length;i++)
+                    {
+                        var file = files[i];
+
+                        if (file_list.indexOf(file)==-1)  {
+                            file_list.push(file)
+                        } 
+                    }
+            }
+
+        // multifile proccess
+        $(".inputFileVisible").click(function(){
+            // $(this).siblings("input[type='file']").click();
+            $('#uploadFile').click()
+        });
+        $(".inputFileVisible").focus(function(){
+            $(this).siblings("input[type='file']").focus();
+        });
+        $(".inputFileHidden").change(function(){
+            // console.log(this.files[0])
+            if(this.files.length > 0){
+                // $(this).siblings(".inputFileVisible").val(this.files[0].name);
+                handleFiles_modal(this.files)
+                // $('.inputFileVisible').val(this.files[0].name);
+
+            }else{
+                $(this).siblings(".inputFileVisible").val("");
+            }
+        });
+        
+        // form monitor event
+        var iSpeed = 0;
+        var obj;
+        var progress = function(e){
+            e = setInterval(function(){
+                 iSpeed =iSpeed + 10;
+                 if(iSpeed>=100){    // 设置达到多少进度后停止
+                    iSpeed-=10
+                     }
+                 $('.progress-bar').attr('style','width: '+iSpeed+'%;')
+             },500)
+        }
+        $('#pre_upload').click(()=>{
+            if (file_list.length!=page_num)
+            {   
+                
+                alert(page_num+'请确认合同页数！'+file_list.length)
+                return false;
+            }else{
+                $('#pre_upload').attr('disabled',true)
+
+                $('#pre_upload_mask').css({'background':'url(basicMedia/img/loading.gif)'})
+
+                var formData = new FormData();
+                for(var i=0;i<file_list.length;i++)
+                    formData.append('file'+i,file_list[i])
+                formData.append('cno',contract_number)
+                $.ajax({
+                        //几个参数需要注意一下
+                            type: "POST",//方法类型
+                            url: "http://127.0.0.1:8000/contract/pre_upload" ,//url
+                            // async: false,
+                            data: formData,
+                            processData : false, // 使数据不做处理
+                            contentType : false, // 不要设置Content-Type请求头
+                            dataType: "json",//预期服务器返回的数据类型n
+                            success: function (result) {
+                                console.log(result);//打印服务端返回的数据(调试用)
+                                $('#up_pdf_area').attr('hidden',true)
+                                $('#up_pdf_thumb').attr('hidden',false)
+                                $('#up_thumb_img').attr('src',result['data']['thumb_url'])
+                                $('.up_thumbnail').attr('href',result['data']['up_pdf_url'])
+                            },
+                            error : function(data,type, err) {
+                                console.log("ajax错误类型："+type);
+                                console.log(err);
+                            }
+                        });
+            }
+
+        })
+        
+        $('#valid_contract_info').click(function(){
+            // $('.progress').attr('hidden',false)
+            file_list = []
+            progress(obj)
+
+
+
+
+            $(this).attr('disabled',true)
+            var formData = new FormData();
+            for(var i=0;i<file_list.length;i++)
+                formData.append('file'+i,file_list[i])
+            formData.append('cno',contract_number)
+            $(this).attr('disabled',true)
+            $.ajax({
+                    //几个参数需要注意一下
+                        type: "POST",//方法类型
+                        url: "http://127.0.0.1:8000/contract/valid_contract_info" ,//url
+                        // async: false,
+                        data: formData,
+                        // async: false,
+                        // cache: false,
+                        processData : false, // 使数据不做处理
+                        contentType : false, // 不要设置Content-Type请求头
+                        dataType: "json",//预期服务器返回的数据类型n
+                        success: function (result) {
+                            // x = JSON.parse(result)
+                            // console.log(result)
+                            iSpeed = 101
+                            clearInterval(obj); 
+                            $('.progress').attr('hidden',true)
+                            // console.log(result);//打印服务端返回的数据(调试用)
+                            sim = parseFloat(result['data']['similarity'])
+                            var r = '合同为真'
+                            if (sim<100)
+                            {
+                                r = '合同存疑'
+                                $('#diff_detail').attr('hidden',false)
+
+                            }
+                            $('.diff_result').val('平均相似度：'+result['data']['similarity']+',  '+r+' !')
+                            $('#diff_detail').attr('href','./diff.html'+'?content='+result['data']['compare_tables_url']+'&similarity='+result['data']['similaritys'])
+                            $('.diff_result').attr('hidden',false)
+                            // window.open(result['data']['diff_url'])
+
+                            
+                        },
+                        error : function(data,type, err) {
+                            console.log("ajax错误类型："+type);
+                            console.log(err);
+                        }
+                    });
+        })
+        $('#diff_detail').click(function(){
+        })
+        $('#save_contract_info').click(function(){
+
+            $(this).attr('disabled',true)
+            $('#upload_mask').css({'background':'url(basicMedia/img/loading.gif)'})
+            // $.mask_element('#save_contract_info', 3000);
+                // console.log($('#up_form').serializeArray())
+                var formData = new FormData();
+                for(var i=0;i<file_list.length;i++)
+                    formData.append('file'+i,file_list[i])
+                // formData.append('files',file_list[0])
+                key = md5(file_list[0].name)
+                data = {}
+                data[key] = {
+                        'upload_name':$('input[name="upload_name"]').val(),
+                        'upload_date':$('input[name="upload_date"]').val(),
+                        'company_name':$('input[name="company_name"]').val(),
+                        'contract_name':$('input[name="contract_name"]').val()
+                        }
+                formData.append('info_data',JSON.stringify(data))
+                //{
+                    // 'files':[object],
+                    // 'info_data':{'md5(file_name)'':{
+                    //      'upload_name':'',
+                    //      'upload_date':'',
+                    //      'company_name':'',
+                    //      'contract_name':''
+                    // }
+                // }
+                // }
+                        
+                $.ajax({
+                    //几个参数需要注意一下
+                        type: "POST",//方法类型
+                        url: "http://127.0.0.1:8000/contract/upload_contract" ,//url
+                        // async: false,
+                        data: formData,
+                        // async: false,
+                        // cache: false,
+                        processData : false, // 使数据不做处理
+                        contentType : false, // 不要设置Content-Type请求头
+                        dataType: "json",//预期服务器返回的数据类型n
+                        success: function (result) {
+                            // table.draw(true);
+                            table.ajax.url('http://127.0.0.1:8000/contract/get_info').load();
+                            $('#upload_mask').css({'background':''})
+                            $('#save_contract_info').attr('disabled',false)
+                            $('.up_form').attr('hidden',true)
+
+                            console.log(result);//打印服务端返回的数据(调试用)
+
+                        },
+                        error : function(data,type, err) {
+                            console.log("ajax错误类型："+type);
+                            console.log(err);
+                        }
+                    });
+
+        })
+
+
+
+
+        // var dropbox = $('#dropbox')
+        var dropbox = document.getElementById('dropbox')
+        document.addEventListener("dragenter", function(e){  
+            dropbox.style.borderColor = 'gray';  
+        }, false);  
+        document.addEventListener("dragleave", function(e){  
+            dropbox.style.borderColor = 'silver';  
+        }, false);  
+        dropbox.addEventListener("dragenter", function(e){  
+            dropbox.style.borderColor = 'gray';  
+            dropbox.style.backgroundColor = 'white';  
+        }, false);  
+        dropbox.addEventListener("dragleave", function(e){    
+            dropbox.style.backgroundColor = 'transparent';  
+        }, false);  
+        dropbox.addEventListener("dragenter", function(e){  
+            e.stopPropagation();  
+            e.preventDefault();  
+        }, false);  
+        dropbox.addEventListener("dragover", function(e){  
+            e.stopPropagation();  
+            e.preventDefault();  
+        }, false);  
+        dropbox.addEventListener("drop", function(e){  
+            e.stopPropagation();  
+            e.preventDefault();  
+            
+            handleFiles(e.dataTransfer.files);  
+
+            
+            // submit.disabled = false;  
+        }, false);  
+
+        var dropbox_modal = document.getElementById('dropbox_modal')
+        document.addEventListener("dragenter", function(e){  
+            dropbox_modal.style.borderColor = 'gray';  
+        }, false);  
+        document.addEventListener("dragleave", function(e){  
+            dropbox_modal.style.borderColor = 'silver';  
+        }, false);  
+        dropbox_modal.addEventListener("dragenter", function(e){  
+            dropbox_modal.style.borderColor = 'gray';  
+            dropbox_modal.style.backgroundColor = 'white';  
+        }, false);  
+        dropbox_modal.addEventListener("dragleave", function(e){    
+            dropbox_modal.style.backgroundColor = 'transparent';  
+        }, false);  
+        dropbox_modal.addEventListener("dragenter", function(e){  
+            e.stopPropagation();  
+            e.preventDefault();  
+        }, false);  
+        dropbox_modal.addEventListener("dragover", function(e){  
+            e.stopPropagation();  
+            e.preventDefault();  
+        }, false);  
+        dropbox_modal.addEventListener("drop", function(e){  
+            e.stopPropagation();  
+            e.preventDefault();  
+
+             
+            handleFiles_modal(e.dataTransfer.files)
+
+        }, false);  
+
+
+        handleFiles = function(files) 
+        {up_file_fun(files,$('#up_form'))}  
+        handleFiles_modal = function(files) 
+        {
+
+            // <button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round" data-toggle="tooltip" data-placement="top" title="Tooltip on top" style="line-height: 0px;"> 99 </button> -->
+
+            var str = $('#exampleFormControlTextarea1').html()
+            for (var i = 0; i < files.length; i++) {  
+                var file = files[i];
+                str+=`<button type="button" class="btn btn-primary btn-fab btn-fab-mini btn-round " data-toggle="tooltip" data-placement="right" title="`+file.name+`" style="line-height: 0px;">`+ (i+1) +`</button>`
+                if (file_list.indexOf(file)==-1)  {
+                    file_list.push(file)
+                } 
+            }
+            $('#exampleFormControlTextarea1').html(str)
+        }  
+
+        $('#modal-close').click(()=>{
+            file_list = []
+            $('#exampleFormControlTextarea1').html('')
+        })
+
+        
+
+      })
+
+</script>
+
+</body>
+</html>
